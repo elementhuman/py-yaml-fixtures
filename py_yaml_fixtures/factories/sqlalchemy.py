@@ -114,6 +114,8 @@ class SQLAlchemyModelFactory(FactoryInterface):
                 rv[col_name] = self.loader.convert_identifiers(value)
             elif not hasattr(col, 'type'):
                 continue
+            elif str(col.type) == "UUID":
+                rv[col_name] = value
             elif col.type.python_type == date:
                 rv[col_name] = self.date_factory(value)
             elif col.type.python_type == time:
